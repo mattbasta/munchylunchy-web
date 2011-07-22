@@ -14,3 +14,8 @@ build.py
 tmp/*
 *~
 *.mo
+*.woff
+*.eot
+*.ttf
+*.otf
+*.svg
