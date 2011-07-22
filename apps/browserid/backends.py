@@ -5,30 +5,24 @@ import logging
 from django.contrib.auth.models import User
 from django.utils import simplejson as json
 
-# TODO: This should be a setting.
-VERIFICATION_SERVER = 'https://browserid.org/verify'
+from api.harness import API
+
 
 class BrowserIdBackend(object):
     supports_object_permissions = False
     supports_anonymous_user = False
 
     def authenticate(self, assertion=None, host='munchylunchy.com', port=80):
-        qs = urllib.urlencode({'assertion': assertion,
-                               'audience': '%s:%s' % (host, port)})
 
-        # TODO: this won't verify the server cert, because Python is
-        # odd. For more info, see:
-        #
-        #   https://github.com/mozilla/browserid/issues/40
-
-        response = urllib2.urlopen('%s?%s' % (VERIFICATION_SERVER, qs))
-        result = json.loads(response.read())
-        if result['status'] == 'okay':
+        result = API.verify_user(assertion=assertion)
+        logging.error(str(result))
+        if result['result'] == 'okay':
             email = result['email']
+            token = result['token']
             try:
                 user = User.objects.get(username=email)
             except User.DoesNotExist:
-                user = User(username=email, password='nonexistent')
+                user = User(username=email, password=token)
                 user.save()
             return user
         logging.error("user login failed: %s" % repr(result))
