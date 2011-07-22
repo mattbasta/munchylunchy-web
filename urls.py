@@ -9,7 +9,8 @@ urlpatterns = patterns('',
     # Example:
     (r'^$', include('home.urls')),
     (r'single/', include('single.urls')),
-    (r'accounts/', include('browserid.urls')),
+    (r'group/', include('group.urls')),
+    (r'', include('browserid.urls')),
 
 
     # Uncomment the admin/doc line below to enable admin documentation:

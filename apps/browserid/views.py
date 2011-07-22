@@ -1,3 +1,4 @@
+from django.core.urlresolvers import reverse
 from django.http import HttpResponse, HttpResponseRedirect, HttpResponseForbidden
 from django.shortcuts import render_to_response
 from django.template import RequestContext
@@ -5,6 +6,8 @@ from django.contrib.auth import authenticate, login, logout
 from django.conf import settings
 from django.views.decorators.http import require_POST
 from django.contrib.auth.decorators import login_required
+
+import jingo
 
 # TODO: This should be a setting.
 BROWSERID_INCLUDE_SCRIPT = 'https://browserid.org/include.js'
@@ -17,15 +20,20 @@ def logout_view(request):
 def login_form(request):
     if request.user.is_authenticated():
         return HttpResponseRedirect(settings.LOGIN_REDIRECT_URL)
-    c = RequestContext(request)
-    return render_to_response(
-        'browserid/login.html',
+    if 'single' in request.GET['next']:
+        forward = 'single.home'
+    elif 'group' in request.GET['next']:
+        forward = 'group.home'
+    else:
+        forward = 'home.home'
+    return jingo.render(request, 'browserid/login.html',
         {
-            'browserid_include_script': BROWSERID_INCLUDE_SCRIPT
-        },
-        context_instance=c
+            'browserid_include_script': BROWSERID_INCLUDE_SCRIPT,
+            'forward': forward
+        }
         )
 
+@require_POST
 def verify_login(request):
     user = authenticate(assertion=request.POST['assertion'],
                         host=request.META['SERVER_NAME'],
@@ -33,7 +41,7 @@ def verify_login(request):
     if user is not None:
         if user.is_active:
             login(request, user)
-            return HttpResponseRedirect(settings.LOGIN_REDIRECT_URL)
+            return HttpResponseRedirect(reverse(request.POST['forward']))
         else:
             return HttpResponse('your account is disabled.')
     else:

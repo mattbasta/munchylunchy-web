@@ -33,6 +33,7 @@ INSTALLED_APPS = list(INSTALLED_APPS) + [
     'django.contrib.staticfiles',
     'home',
     'single',
+    'group',
     'browserid',
 ]
 
@@ -41,9 +42,9 @@ AUTHENTICATION_BACKENDS = (
     'browserid.backends.BrowserIdBackend',
 )
 
-LOGIN_URL = '/accounts/login'
-LOGOUT_URL = '/accounts/logout'
-LOGIN_REDIRECT_URL = '/single'
+LOGIN_URL = '/login'
+LOGOUT_URL = '/logout'
+LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
 
 PREPEND_WWW = False
@@ -51,7 +52,9 @@ PREPEND_WWW = False
 APPEND_SLASH = False
 
 SUPPORTED_NONLOCALES = list(SUPPORTED_NONLOCALES) + [
-    'accounts',
+    'login',
+    'logout',
+    'verify_login',
 ]
 
 # Tells the extract script what files to look for L10n in and what function

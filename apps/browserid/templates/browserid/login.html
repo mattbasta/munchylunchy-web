@@ -1,6 +1,6 @@
-<!DOCTYPE html>
-<meta charset="utf-8">
-<title>BrowserID Login</title>
+{% extends "base.html" %}
+
+{% block content %}
 <script src="{{ browserid_include_script }}"></script>
 <script>
 function login() {
@@ -18,9 +18,22 @@ function login() {
   });
 }
 </script>
-<p onclick="login()">click me to login</p>
-<form action="{% url browserid.views.verify_login %}" method="post" id="verify_login">
-  <input type="hidden" name="assertion" id="assertion">
-  {% csrf_token %}
+<form action="{{ url('browserid.views.verify_login') }}" method="post" id="verify_login">
+  <input type="hidden" name="assertion" id="assertion" />
+  <input type="hidden" name="forward" value="{{ forward }}" />
+  {{ csrf() }}
 </form>
-
+<header><a href="/">Munchy Lunchy</a></header>
+  <div class="p1 s1" id="login_bang">
+    <h1>Login, quick!</h1>
+    <a class="button blue" id="login_button" onclick="login()">
+      <span class="round uppercase">Let's Do This!</span>
+      <small>Powered by <img src="/media/img/browserid.png" alt="BrowserID" /></small>
+    </a>
+    <div class="clear"></div>
+  </div>
+  <section id="login_explanation">
+    <h2>Don't have an account? No worries.</h2>
+    <p>If you have a BrowserID, you're already covered. If not, it only takes a minute. We don't even ask for your name.</p>
+    </section>
+{% endblock %}
