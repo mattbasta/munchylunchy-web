@@ -25,8 +25,21 @@ MINIFY_BUNDLES = {
 
 INSTALLED_APPS = list(INSTALLED_APPS) + [
     # Example code. Can (and should) be removed for actual projects.
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.sites',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
+    'home',
     'single',
+    'browserid',
 ]
+
+
+AUTHENTICATION_BACKENDS = (
+    'browserid.backends.BrowserIdBackend',
+)
 
 
 # Tells the extract script what files to look for L10n in and what function

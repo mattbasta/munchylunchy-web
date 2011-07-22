@@ -1,19 +1,18 @@
 <!DOCTYPE html>
-<html LANG="{{ LANG }}" dir="{{ DIR }}">
-  <head>
-    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
-    <title>{% block page_title %}playdoh examples{% endblock %}</title>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Munchy Lunchy - Figure out what to eat for lunch</title>
+<link href="http://framecdn.serverboy.net/latest.css" rel="stylesheet" type="text/css">
+{% block site_css %}
+  {{ css('common') }}
+{% endblock %}
+</head>
 
-    {% block site_css %}
-      {{ css('common') }}
-    {% endblock %}
-  </head>
-  <body>
+<body class="sans-serif med">
+  <div id="container">
     {% block content %}{% endblock %}
-
-    {% block site_js %}
-      {{ js('main') }}
-    {% endblock %}
-  </body>
+  </div>
+</body>
 </html>
 
