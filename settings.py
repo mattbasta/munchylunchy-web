@@ -41,6 +41,18 @@ AUTHENTICATION_BACKENDS = (
     'browserid.backends.BrowserIdBackend',
 )
 
+LOGIN_URL = '/accounts/login'
+LOGOUT_URL = '/accounts/logout'
+LOGIN_REDIRECT_URL = '/single'
+LOGOUT_REDIRECT_URL = '/'
+
+PREPEND_WWW = False
+
+APPEND_SLASH = False
+
+SUPPORTED_NONLOCALES = list(SUPPORTED_NONLOCALES) + [
+    'accounts',
+]
 
 # Tells the extract script what files to look for L10n in and what function
 # handles the extraction. The Tower library expects this.
