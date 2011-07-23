@@ -16,6 +16,7 @@ body {background-color: #EFEFEF;}
 h1, h2, h3, h4,
 a.button span {
     font-family: 'Conv_DINRoundOT-Bold', Sans-Serif;
+    font-weight: normal !important;
 }
 
 #container {
@@ -115,6 +116,14 @@ a.button:active {
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#119ed9',  endColorstr='#008dc8', GradientType=0 );
 }
 
+.grey {
+    background: #bcbcbc;
+    background: -moz-linear-gradient(top,  #cbcbcb 0%,  #bcbcbc 100%);
+    background: -webkit-gradient(linear,  left top,  left bottom,  color-stop(0%, #cbcbcb),  color-stop(100%, #bcbcbc));
+    background: linear-gradient(top,  #cbcbcb 0%,  #bcbcbc 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#cbcbcb',  endColorstr='#bcbcbc', GradientType=0 );
+}
+
 .button span {
     display: block;
     font-size: 35px;
@@ -199,7 +208,9 @@ h2 {
     font-size:24px;
     color: #474b4c;
 }
-h3 {}
+h3 {
+    color: #474b4c;
+}
 
 #buttons h1 {
     text-align: center;
@@ -231,4 +242,120 @@ h3 {}
     margin: 10px 0;
 }
 
+#no_bang {
+    padding-top: 30px;
+    text-align: center;
+}
 
+#questions {
+    padding-top: 30px;
+}
+
+.question {
+    padding: 0 150px 30px;
+    clear: both;
+}
+
+.question .button {
+    float: left;
+}
+
+.question .button.yep {
+    float: right;
+}
+
+#questions h3 {
+    margin-bottom: 30px;
+}
+
+#questions .question  .button {
+    font-size: 36px;
+    line-height: 90px;
+}
+
+#questions_left {
+    margin: 3px;
+    padding: 3px 0.5em;
+    background-color: rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+}
+
+.button.square {
+    height: 100px;
+    width: 100px;
+}
+
+.button.square:active {
+    height: 94px;
+}
+
+.question p {
+    padding-top: 25px;
+    font-size: 24px;
+    color: #474b4c;
+}
+
+#bottom_buttons {
+    display: none;
+}
+
+#bottom_buttons .button {
+    width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#bottom_buttons .button.continue {
+    font-size: 30px;
+    height: 100px;
+    line-height: 95px;
+}
+
+#bottom_buttons .button.continue:active {
+    height: 94px;
+}
+
+#bottom_buttons .button.more {
+    font-size: 24px;
+    height: 50px;
+    line-height: 45px;
+}
+
+#bottom_buttons .button.more:active {
+    height: 44px;
+}
+
+#bottom_buttons .more {
+    display: none;
+}
+.button_wrap {
+    height: 120px;
+}
+
+.close {
+    margin-top: 35px;
+    margin-left: 20px;
+    margin-right: -48px;
+    height: 24px;
+    width: 24px;
+    background-color: rgba(0, 0, 0, 0.1);
+    float: right;
+    cursor: pointer;
+}
+
+.close:hover {
+    background-color: rgba(0, 0, 0, 0.25);
+}
+
+.close:active {
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+#logout {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 5px;
+    color: #999;
+    text-decoration: none;
+}

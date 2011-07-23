@@ -15,7 +15,7 @@ BROWSERID_INCLUDE_SCRIPT = 'https://browserid.org/include.js'
 @login_required
 def logout_view(request):
     logout(request)
-    return HttpResponse('You are now logged out.')
+    return HttpResponseRedirect(settings.LOGOUT_REDIRECT_URL)
 
 def login_form(request):
     if request.user.is_authenticated():

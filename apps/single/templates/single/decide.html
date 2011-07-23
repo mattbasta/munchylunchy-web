@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block content %}
+<header><a href="/">Munchy Lunchy</a></header>
+  <div class="p1 s1" id="login_bang">
+    <h1>You obviously should eat at...</h1>
+    <h2>{{ decision }}</h2>
+    <div class="clear"></div>
+  </div>
+  <section id="login_explanation">
+    <h2>Here's why:</h2>
+    <ul>
+      {% for reason in reasons %}
+        <li>{{ reason }}</li>
+      {% endfor %}
+    </ul>
+    </section>
+{% endblock %}

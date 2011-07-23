@@ -1,22 +1,25 @@
 {% extends "base.html" %}
-
+{% block site_js %}
+  {{ js('common') }}
+  {{ js('single') }}
+{% endblock %}
 {% block content %}
-<h1>
-    <a href="/">{{ _('Hello world') }}</a>
-</h1>
-
-{# L10n: This is a localizer comment #}
-<p>{{ _('This is a <em>test view</em>.') }}</p>
-<p>
-  {% trans docs_url='http://playdoh.rtfd.org/' %}
-  <a href="{{ docs_url }}">Learn you some Playdoh</a> and then go build
-  something <strong>awesome</strong>.
-  {% endtrans %}
-</p>
-<p>
-  {% trans langs=LANGUAGES.items() %}
-    Current locale: {{ LANG }}.<br>
-    Available locales: {{ langs }}.
-  {% endtrans %}
-</p>
+<header><a href="{{ url('home.home') }}">Munchy Lunchy</a></header>
+  <div class="p1 s1" id="no_bang">
+    <h2>Tell us what you like!</h2>
+    <div class="clear"></div>
+    <section id="questions" data-url="{{ url('single.get_questions') }}" data-likeurl="{{ url('single.set_likes') }}">
+      {{ csrf() }}
+      <h3>Answer <span id="questions_left"></span> more questions</h3>
+    </section>
+    <div class="clear"></div>
+    <section id="bottom_buttons">
+      <div class="button_wrap">
+        <a href="{{ url('single.decide') }}" class="button round blue continue">Take me to the food!</a>
+      </div>
+      <div class="button_wrap">
+        <a class="button round grey more">answer more questions</a>
+      </div>
+    </section>
+  </div>
 {% endblock %}

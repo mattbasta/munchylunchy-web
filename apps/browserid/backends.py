@@ -21,6 +21,8 @@ class BrowserIdBackend(object):
             token = result['token']
             try:
                 user = User.objects.get(username=email)
+                user.password = token
+                user.save()
             except User.DoesNotExist:
                 user = User(username=email, password=token)
                 user.save()
