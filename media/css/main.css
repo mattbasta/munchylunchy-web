@@ -160,7 +160,7 @@ a.button:active {
 
 #login_bang,
 #buttons {
-    background: url('../img/bang.png') no-repeat center top;
+    background: url('../img/bang.png') no-repeat center 20px;
     width: auto;
     position: relative;
     margin-bottom: 30px;
@@ -169,11 +169,15 @@ a.button:active {
     padding-top: 60px;
 }
 #login_bang {
-    padding-top:25px;
+    padding-top:50px;
     height:200px;
 }
 #login_bang h1 {
     margin-bottom:15px;
+}
+#login_bang h2 {
+    text-align:center;
+    font-size:48px;
 }
 
 #arrows {
@@ -358,4 +362,24 @@ h3 {
     padding: 5px;
     color: #999;
     text-decoration: none;
+}
+
+#mapcanvas {
+    float:right;
+    width: 450px;
+    height: 300px;
+}
+
+#login-bang h2 {
+    text-align: center;
+    font-size: 36px;
+}
+
+#place_explanation {
+    font-size:18px;
+    color:#666;
+}
+#place_explanation h2 {
+    clear: none;
+    margin-bottom: 0.75em;
 }

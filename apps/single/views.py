@@ -47,14 +47,18 @@ def decide(request):
     reasons = []
     for reason in result['reasons']:
         if reason.startswith('like:'):
-            reasons.append('You like %s.' % settings.FOOD_STYLES[reason[6:]])
+            reasons.append('You like %s.' % settings.FOOD_STYLES[reason[5:]])
         elif reason == 'distance':
             reasons.append("It's nearby.")
         elif reason == 'great_rating':
             reasons.append("It has a great rating of %d stars on Yelp." % result['stars'])
         elif reason == 'good_rating':
             reasons.append('It has a good rating of %d stars on Yelp.' % result['stars'])
+        elif reason == 'notrecent':
+            reasons.append("We haven't suggested this to you in a while.")
 
     data = { 'decision': result['business']['name'],
-             'reasons': result['reasons']}
+             'reasons': reasons,
+             'latitude': result['business']['location']['coordinate']['latitude'],
+             'longitude': result['business']['location']['coordinate']['longitude']}
     return jingo.render(request, 'single/decide.html', data)
