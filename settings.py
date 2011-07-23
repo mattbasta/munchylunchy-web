@@ -18,10 +18,12 @@ MINIFY_BUNDLES = {
     'js': {
         'common': (
             'js/libs/jquery-1.6.2.min.js',
-            'js/common.js',
         ),
-        'single': (
-            'js/single.js',
+        'questions': (
+            'js/questions.js',
+        ),
+        'singlemap': (
+            'js/singlemap.js',
         ),
         'group': (
             'js/group.js',

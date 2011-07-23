@@ -1,14 +1,36 @@
 {% extends "base.html" %}
 
+{% block site_js %}
+  {{ js('common') }}
+  {{ js('group') }}
+{% endblock %}
+
 {% block content %}
 <header><a href="/">Munchy Lunchy</a></header>
-  <div class="p1 s1" id="login_bang">
-    <h1>You obviously should eat at...</h1>
-    <h2>{{ decision }}</h2>
-    <div class="clear"></div>
+<section id="dashboard">
+<div class="g5 gfirst p2" id="group_choices" data-foodurl="{{ url('group.async_list', groupid) }}">
+    {{ csrf() }}
+    <h1>We're Thinking...</h1>
+    <div id="group_choice_wrap">
+      {% for choice in choices %}
+        <p>
+          <small>({{ choice[1] }} points)</small>
+          <span class="round">{{ choice[0] }}</span>
+        </p>
+      {% endfor %}
+    </div>
   </div>
-  <section id="login_explanation">
-    <h2>Don't have an account? No worries.</h2>
-    <p>If you have a BrowserID, you're already covered. If not, it only takes a minute. We don't even ask for your name.</p>
-    </section>
+  <div class="g3 glast s2" id="members_col">
+    <a class="button blue round">Invite Your Friends</a>
+    <p>Already Invited:</p>
+    <ul id="memberlist">
+      {% for member in members %}
+        <li>{{ member }}</li>
+      {% endfor %}
+    </ul>
+  </div>
+  <div class="clear"></div>
+  <div id="mapcanvas_group" data-lat="{{ latitude }}" data-lon="{{ longitude }}"></div>
+</section>
+<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
 {% endblock %}

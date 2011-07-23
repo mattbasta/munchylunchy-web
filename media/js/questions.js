@@ -1,12 +1,14 @@
 $(document).ready(function() {
     var startText = $('#questions h3').html()
-    $('#questions h3').html('Please wait while we load your customized questions...')
+    $('#questions h3').html('Please wait while we load your customized questions...');
+    $("#bottom_buttons").hide();
     navigator.geolocation.getCurrentPosition(
         function(position) {
             console.log(position.coords.latitude);
             console.log(position.coords.longitude);
             $('#questions h3').html(startText);
-            var contButton = $('#bottom_buttons .continue')
+            $("#bottom_buttons").show();
+            var contButton = $('#bottom_buttons .continue');
             contButton.attr('href', contButton.attr('href') + '?latitude=' + position.coords.latitude + '&longitude=' + position.coords.longitude);
             getQuestions(position);
         },
@@ -70,21 +72,6 @@ $(document).ready(function() {
             error: function() {
                 // Error with AJAX request
             }
-        });
-    }
-
-    if($('#mapcanvas').length) {
-        var map = $('#mapcanvas');
-        var latlng = new google.maps.LatLng(parseFloat(map.data('lat')), parseFloat(map.data('long')));
-        var myOptions = {
-            zoom: 17,
-            center: latlng,
-            mapTypeId: google.maps.MapTypeId.ROADMAP
-        };
-        var mapobj = new google.maps.Map(document.getElementById("mapcanvas"), myOptions);
-        var marker = new google.maps.Marker({
-            position: latlng,
-            map: mapobj
         });
     }
 

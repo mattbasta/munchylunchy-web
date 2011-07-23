@@ -51,9 +51,9 @@ def decide(request):
         elif reason == 'distance':
             reasons.append("It's nearby.")
         elif reason == 'great_rating':
-            reasons.append("It has a great rating of %d stars on Yelp." % result['stars'])
+            reasons.append("It has a great rating of %f stars on Yelp." % result['stars'])
         elif reason == 'good_rating':
-            reasons.append('It has a good rating of %d stars on Yelp.' % result['stars'])
+            reasons.append('It has a good rating of %f stars on Yelp.' % result['stars'])
         elif reason == 'notrecent':
             reasons.append("We haven't suggested this to you in a while.")
 

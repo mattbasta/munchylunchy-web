@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% block site_js %}
   {{ js('common') }}
-  {{ js('group') }}
+  {{ js('questions') }}
 {% endblock %}
 {% block content %}
 <header><a href="{{ url('home.home') }}">Munchy Lunchy</a></header>
@@ -15,7 +15,7 @@
     <div class="clear"></div>
     <section id="bottom_buttons">
     <div class="button_wrap">
-        <a class="button round blue continue">Take me to the food!</a>
+      <a href="{{ url('group.dashboard', groupid) }}" class="button round blue continue">Take me to the food!</a>
       </div>
       <div class="button_wrap">
         <a class="button round grey more">answer more questions</a>

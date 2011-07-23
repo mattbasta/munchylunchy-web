@@ -2,7 +2,8 @@ import json
 
 from django import http
 from django.conf import settings
-from django.http import HttpResponse
+from django.core.urlresolvers import reverse
+from django.http import HttpResponse, HttpResponseRedirect, HttpResponseBadRequest
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.http import require_POST
 
@@ -12,18 +13,44 @@ from api.harness import API, User
 
 
 @login_required
-def home(request):
+def home(request): # create
     data = {}  # You'd add data here that you're sending to the template.
-    return jingo.render(request, 'group/home.html', data)
+    you = User(request.user.username, request.user.password)
+    group_id = API.group_create(you)['group_id']
+    return HttpResponseRedirect(reverse('group.get_info', args=[group_id]))
 
 @login_required
-def decide(request):
-    you = User(request.user.username, request.user.password)
-    result = API.places_decide(you, request.GET['latitude'], request.GET['longitude'])
+def get_info(request, group_id):
+    data = {'groupid': group_id}
+    return jingo.render(request, 'group/ask.html', data)
 
-    data = { 'decision': result['decision'] }
-    return jingo.render(request, 'group/decide.html', data)
 
 @login_required
 def dashboard(request, group_id):
-    return jingo.render(request, 'group/dashboard.html', data)
+    you = User(request.user.username, request.user.password)
+
+    if 'latitude' in request.GET:
+        latitude = request.GET['latitude']
+    else:
+        latitude = '0'
+
+    if 'longitude' in request.GET:
+        longitude = request.GET['longitude']
+    else:
+        longitude = '0'
+    data = API.group_register(you, group_id, latitude, longitude)
+    if data['registered'] == 'new':
+        return HttpResponseRedirect(reverse('group.get_info', args=[group_id]))
+    elif data['registered'] == 'yes':
+        data['groupid'] = group_id
+        return jingo.render(request, 'group/dashboard.html', data)
+
+    return HttpResponseBadRequest()
+
+@login_required
+def async_list(request, group_id):
+    data = {}
+    you = User(request.user.username, request.user.password)
+    restaurants = API.group_poll(you, group_id)
+
+    return HttpResponse(json.dumps(restaurants))

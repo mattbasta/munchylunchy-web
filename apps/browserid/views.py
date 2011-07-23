@@ -22,6 +22,8 @@ def login_form(request):
         return HttpResponseRedirect(settings.LOGIN_REDIRECT_URL)
     if 'single' in request.GET['next']:
         forward = 'single.home'
+    elif 'group/dashboard/' in request.GET['next']:
+        forward = 'group.dashboard:' + request.GET['next'][-4:]
     elif 'group' in request.GET['next']:
         forward = 'group.home'
     else:
@@ -41,7 +43,13 @@ def verify_login(request):
     if user is not None:
         if user.is_active:
             login(request, user)
-            return HttpResponseRedirect(reverse(request.POST['forward']))
+            if 'group.dashboard' in request.POST['forward']:
+                fwd = request.POST['forward'].split(':')
+                url = reverse(fwd[0], args=[fwd[1]])
+            else:
+                url = reverse(request.POST['forward'])
+
+            return HttpResponseRedirect(url)
         else:
             return HttpResponse('your account is disabled.')
     else:

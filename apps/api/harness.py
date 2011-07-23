@@ -51,6 +51,16 @@ class API(object):
     def group_create(c, user):
         return request("groups/create", {}, user=user)
 
+    @classmethod
+    def group_register(c, user, group_id, latitude, longitude):
+        return request("groups/register",
+                       {"id": group_id, "lat": latitude, "lon": longitude},
+                       "POST", user=user)
+
+    @classmethod
+    def group_poll(c, user, group_id):
+        return request("groups/poll", {"id": group_id}, user=user)
+
 
 class User(object):
     def __init__(self, email, token):
