@@ -20,6 +20,14 @@
         <li>{{ reason }}</li>
       {% endfor %}
     </ul>
+    <h2>Business Information:</h2>
+    <ul>
+      <li>Address:
+      {% for line in address %}
+        {{ line }}
+      {% endfor %}</li>
+      <li>Phone: {{ phone }}</li>
+    </ul>
   </section>
 <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
 {% endblock %}

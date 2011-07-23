@@ -30,7 +30,15 @@
     </ul>
   </div>
   <div class="clear"></div>
+  <section id="share">
+    <span>Share This Group:</span> <input type="text" value="http://munchylunchy.com/group/dashboard/{{ groupid }}" />
+  </section>
+  <div class="clear"></div>
   <div id="mapcanvas_group" data-lat="{{ latitude }}" data-lon="{{ longitude }}"></div>
+  <section id="whatamilookingat">
+    <h2>What am I looking at?</h2>
+    <p>When you share the link to this page, anyone that signs in will automatically be signed up for lunch. As your friends sign in, the list of suggested venues will automatically re-sort.</p>
+  </section>
 </section>
 <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
 {% endblock %}

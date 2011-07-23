@@ -51,14 +51,16 @@ def decide(request):
         elif reason == 'distance':
             reasons.append("It's nearby.")
         elif reason == 'great_rating':
-            reasons.append("It has a great rating of %f stars on Yelp." % result['stars'])
+            reasons.append("It has a great rating of %.1f stars on Yelp." % result['stars'])
         elif reason == 'good_rating':
-            reasons.append('It has a good rating of %f stars on Yelp.' % result['stars'])
+            reasons.append('It has a good rating of %.1f stars on Yelp.' % result['stars'])
         elif reason == 'notrecent':
             reasons.append("We haven't suggested this to you in a while.")
 
     data = { 'decision': result['business']['name'],
              'reasons': reasons,
              'latitude': result['business']['location']['coordinate']['latitude'],
-             'longitude': result['business']['location']['coordinate']['longitude']}
+             'longitude': result['business']['location']['coordinate']['longitude'],
+             'address': result['business']['location']['display_address'],
+             'phone': result['business']['display_phone']}
     return jingo.render(request, 'single/decide.html', data)

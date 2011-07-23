@@ -461,3 +461,25 @@ h3 {
     margin:20px 120px;
     height:380px;
 }
+
+#whatamilookingat {
+    padding: 20px 150px;
+    font-size:18px;
+    color:#666;
+}
+#whatamilookingat h2 {margin-bottom:0.5em;}
+
+#share {
+    text-align:center;
+    font-size:1.2em;
+    padding:15px 0 10px;
+}
+#share input {
+    border: 1px solid #666;
+    padding:0.2em;
+    width:400px;
+    background:#fafafa;
+    border-radius:3px;
+    font-size: 1.05em;
+}
+
