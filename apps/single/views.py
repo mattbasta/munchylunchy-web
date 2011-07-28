@@ -2,10 +2,10 @@ import json
 
 from django import http
 from django.conf import settings
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
+from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.http import require_POST
-
 import jingo
 
 from api.harness import API, User
@@ -13,6 +13,15 @@ from api.harness import API, User
 
 @login_required
 def home(request):
+    you = User(request.user.username, request.user.password)
+    response = API.verify_token(you)
+    if (not response or
+        "result" not in response or
+        response["result"] != "okay"):
+
+        logout(request)
+        return HttpResponseRedirect(reverse('single.home'))
+
     data = {}  # You'd add data here that you're sending to the template.
     return jingo.render(request, 'single/home.html', data)
 
@@ -21,6 +30,9 @@ def get_questions(request):
     you = User(request.user.username, request.user.password)
     response = API.taste_query(you, request.POST['latitude'],
                                request.POST['longitude'])
+    if not response:
+        logout(request)
+        return HttpResponseRedirect(reverse('single.get_questions'))
 
     if response['result'] != 'okay':
         return HttpResponse(json.dumps(response))
@@ -43,6 +55,9 @@ def set_likes(request):
 def decide(request):
     you = User(request.user.username, request.user.password)
     result = API.places_decide(you, request.GET['latitude'], request.GET['longitude'])
+    if not result:
+        logout(request)
+        return HttpResponseResult(reverse('single.decide'))
 
     reasons = []
     for reason in result['reasons']:
