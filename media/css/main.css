@@ -3,7 +3,7 @@
 @font-face {
     font-family: 'Conv_DINRoundOT-Bold';
     src: url('../fonts/DINRoundOT-Bold.eot');
-    src: local('?'), url('../fonts/DINRoundOT-Bold.woff') format('woff'), url('../fonts/DINRoundOT-Bold.ttf') format('truetype'), url('../fonts/DINRoundOT-Bold.svg') format('svg');
+    src: local('?'), url('../fonts/DINRoundOT-Bold.ttf') format('truetype'), url('../fonts/DINRoundOT-Bold.svg') format('svg');
     font-weight: normal;
     font-style: normal;
 }
@@ -41,6 +41,16 @@ header a {
     margin-right: auto;
     height: 100px;
     width: 350px;
+}
+
+footer {
+    text-align:center;
+    color:#666;
+    padding:30px 0;
+}
+footer img {
+    vertical-align:bottom;
+    margin-bottom:-2px;
 }
 
 a.button, a.button:link, a.button:visited {
