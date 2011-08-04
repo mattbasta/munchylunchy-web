@@ -17,6 +17,10 @@ $(document).ready(function() {
                                                     new google.maps.Size(48, 48),
                                                     new google.maps.Point(0, 0),
                                                     new google.maps.Point(24, 24));
+    var food_marker = new google.maps.MarkerImage("http://maps.google.com/mapfiles/kml/pal2/icon32.png",
+                                                  new google.maps.Size(32, 32),
+                                                  new google.maps.Point(0, 0),
+                                                  new google.maps.Point(16, 16));
     var marker = new google.maps.Marker({
         position: orig_center,
         map: mapobj,
@@ -52,10 +56,13 @@ $(document).ready(function() {
                     if(places[i]["name"] in places_m)
                         continue;
                     places_m[places[i]["name"]] = true;
-                    var marker = new google.maps.Marker({position: get_ll(places[i]["latitude"], places[i]["longitude"]), map: mapobj, title: places[i]["name"]});
+                    var marker = new google.maps.Marker({
+                        position: get_ll(places[i]["latitude"], places[i]["longitude"]),
+                        map: mapobj,
+                        title: places[i]["name"],
+                        icon: food_marker
+                    });
                 }
-                mapobj.setCenter(get_ll(response["latitude"], response["longitude"]));
-
             }
         });
     }, 5000);
